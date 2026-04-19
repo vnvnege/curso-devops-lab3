@@ -32,10 +32,10 @@ pipeline {
                 }
             }
         }
-    }    
-    stage("CI de la aplicacion - build dockerfile") {
-        steps {
-            sh "docker build -t lab3-devops-vvf ."
-        }
-    }    
+        stage("CI de la aplicacion - build dockerfile") {
+            steps {
+                sh "docker build -t lab3-devops-vvf ."
+            }
+        }  
+    }         
 }
