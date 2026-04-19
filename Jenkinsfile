@@ -5,17 +5,26 @@ pipeline {
         }
     }
     stages {
-        stage("CI de la aplicacion") {
+        stage("CI de la aplicacion - dependencias") {
             steps {
-                sh "echo 'este es el primer paso para instalar dependencia'"
-                sh "npm install"
-                sh "ls -l"
-                sh "hostname"
+                sh "npm install"                
             }
         }
-        stage("La segunda etapa fome") {
+        stage("CI de la aplicacion - lint") {
             steps {
-                sh "echo 'esto es la prueba de la segunda etapa en jenkins'"
+                sh "npm run lint"
+
+            }
+        }
+        stage("CI de la aplicacion - test") {
+            steps {
+                sh "npm run test"
+
+            }
+        }
+        stage("CI de la aplicacion - build") {
+            steps {
+                sh "npm run build"
 
             }
         }
