@@ -39,12 +39,16 @@ pipeline {
                 script{
                     docker.withRegistry("https://index.docker.io/v1/","credencial-dh") {
                         sh "docker tag lab3-devops-vvf vnvenega/lab3-devops-vvf:latest"
-                        sh "docker push vnvenega/lab3-devops-vvf:latest"                
+                        sh "docker tag lab3-devops-vvf vnvenega/lab3-devops-vvf:${env.BUILD_NUMBER}"
+                        sh "docker push vnvenega/lab3-devops-vvf:latest"
+                        sh "docker push vnvenega/lab3-devops-vvf:${env.BUILD_NUMBER}"   
                     }
 
                     docker.withRegistry("https://ghcr.io","credential-gh") {
                         sh "docker tag lab3-devops-vvf ghcr.io/vnvnege/lab3-devops-vvf:latest"
+                        sh "docker tag lab3-devops-vvf ghcr.io/vnvnege/lab3-devops-vvf:${env.BUILD_NUMBER}"
                         sh "docker push ghcr.io/vnvnege/lab3-devops-vvf:latest"
+                        sh "docker push ghcr.io/vnvnege/lab3-devops-vvf:${env.BUILD_NUMBER}"
                     }    
                 }                          
             }
