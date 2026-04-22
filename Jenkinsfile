@@ -35,6 +35,12 @@ pipeline {
         stage("CI de la aplicacion - build dockerfile") {
             steps {
                 sh "docker build -t lab3-devops-vvf ."
+
+                sh "docker tag lab3-devops-vvf vnvenega/lab3-devops-vvf:latest"
+                sh "docker push vnvenega/lab3-devops-vvf:latest"
+
+                sh "docker tag lab3-devops-vvf ghcr.io/vnvnege/lab3-devops-vvf:latest"
+                sh "docker push ghcr.io/vnvenega/lab3-devops-vvf:latest"
             }
         }  
     }         
