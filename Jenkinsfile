@@ -44,7 +44,7 @@ pipeline {
 
                     docker.withRegistry("https://ghcr.io","credential-gh") {
                         sh "docker tag lab3-devops-vvf ghcr.io/vnvnege/lab3-devops-vvf:latest"
-                        sh "docker push ghcr.io/vnvenega/lab3-devops-vvf:latest"
+                        sh "docker push ghcr.io/vnvnege/lab3-devops-vvf:latest"
                     }    
                 }                          
             }
