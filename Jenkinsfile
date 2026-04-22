@@ -36,11 +36,17 @@ pipeline {
             steps {
                 sh "docker build -t lab3-devops-vvf ."
 
-                sh "docker tag lab3-devops-vvf vnvenega/lab3-devops-vvf:latest"
-                sh "docker push vnvenega/lab3-devops-vvf:latest"
+                script{
+                    docker.withRegistry("https://index.docker.io/v1/";"credencial-dh") {
+                        sh "docker tag lab3-devops-vvf vnvenega/lab3-devops-vvf:latest"
+                        sh "docker push vnvenega/lab3-devops-vvf:latest"                
+                    }
 
-                sh "docker tag lab3-devops-vvf ghcr.io/vnvnege/lab3-devops-vvf:latest"
-                sh "docker push ghcr.io/vnvenega/lab3-devops-vvf:latest"
+                    docker.withRegistry("https://ghcr.io";"credential-gh") {
+                        sh "docker tag lab3-devops-vvf ghcr.io/vnvnege/lab3-devops-vvf:latest"
+                        sh "docker push ghcr.io/vnvenega/lab3-devops-vvf:latest"
+                    }    
+                }                          
             }
         }  
     }         
