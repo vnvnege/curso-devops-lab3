@@ -21,8 +21,7 @@ pipeline {
                 }
                 stage("CI de la aplicacion - test") {
                     steps {
-                        sh "npm run test"
-
+                        sh "npm run test:cov"
                     }
                 }
                 stage("CI de la aplicacion - build") {
@@ -32,31 +31,62 @@ pipeline {
                 }
             }
         }
+
+        stage("Quality Assurance"){
+            agent {
+                docker {
+                    image 'sonarsource/sonar-scanner-cli'
+                    args '--network=devops-infra_default'
+                    reuseNode true
+                }
+            }
+            stages{
+                stage("validacion de codigo"){
+                    steps{
+                        withSonarQubeEnv('sonarqube'){
+                            sh 'sonar-scanner'
+                        }
+                    }
+                }
+                stage('validacion quality gate'){
+                    steps{
+                        script{
+                            def  qualityGate = waitForQualityGate() // esperar por el resultado del qualitygate en un endpoint de jenkins, que se gatilla desde sonar via webhook.
+                            if(qualityGate.status != 'OK'){
+                                error "La puerta de calidad ha fallado : ${qualityGate.status}"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
         stage("CI de la aplicacion - build dockerfile") {
             steps {
                 sh "docker build -t lab3-devops-vvf ."
 
                 script{
-                    var semantic = sh(
+                    /*var semantic = sh(
                         script: 'npm pkg get version| tr -d \'"\'',
                         returnStdout:true
-                    ).trim()
+                    ).trim()*/
                     docker.withRegistry("https://index.docker.io/v1/","credencial-dh") {
                         sh "docker tag lab3-devops-vvf vnvenega/lab3-devops-vvf:latest"
                         sh "docker tag lab3-devops-vvf vnvenega/lab3-devops-vvf:${env.BUILD_NUMBER}"
-                        sh "docker tag lab3-devops-vvf vnvenega/lab3-devops-vvf:${semantic}"
+                        //sh "docker tag lab3-devops-vvf vnvenega/lab3-devops-vvf:${semantic}"
                         sh "docker push vnvenega/lab3-devops-vvf:latest"
                         sh "docker push vnvenega/lab3-devops-vvf:${env.BUILD_NUMBER}"
-                        sh "docker push vnvenega/lab3-devops-vvf:${semantic}"   
+                        //sh "docker push vnvenega/lab3-devops-vvf:${semantic}"   
                     }
 
                     docker.withRegistry("https://ghcr.io","credential-gh") {
                         sh "docker tag lab3-devops-vvf ghcr.io/vnvnege/lab3-devops-vvf:latest"
                         sh "docker tag lab3-devops-vvf ghcr.io/vnvnege/lab3-devops-vvf:${env.BUILD_NUMBER}"
-                        sh "docker tag lab3-devops-vvf ghcr.io/vnvnege/lab3-devops-vvf:${semantic}"
+                        //sh "docker tag lab3-devops-vvf ghcr.io/vnvnege/lab3-devops-vvf:${semantic}"
                         sh "docker push ghcr.io/vnvnege/lab3-devops-vvf:latest"
                         sh "docker push ghcr.io/vnvnege/lab3-devops-vvf:${env.BUILD_NUMBER}"
-                        sh "docker push ghcr.io/vnvnege/lab3-devops-vvf:${semantic}"
+                        //sh "docker push ghcr.io/vnvnege/lab3-devops-vvf:${semantic}"
                     }    
                 }                          
             }
