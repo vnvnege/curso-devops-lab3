@@ -15,8 +15,12 @@ describe('AppController', () => {
   });
 
   describe('Probando la raiz del sitio', () => {
-    it('should return "Hello World!"', () => {
+    it('probando funcion getHello"', () => {
       expect(appController.getHello()).toBe('Hello World!');
+      expect(appController.getHello()).not.toBe('Hola Mundo!');
+    });
+    it('probando funcion getSaludo"', () => {
+      expect(appController.getSaludo()).toBe('Hola Mundo!');
     });
   });
 });
