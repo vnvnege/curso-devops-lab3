@@ -5,6 +5,7 @@ pipeline {
             agent {
                 docker {
                     image "node:24"
+                    reuseNode true
                 }
             }
             stages {
