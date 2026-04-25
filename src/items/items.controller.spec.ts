@@ -39,7 +39,7 @@ describe('ItemsService', () => {
     expect(service.remove(3)).toBeNull();
     expect(() =>
       service.findOne(3))
-      .toThrow('Item 3 not found',);
+      .toThrow('Item 3 no encontrado',);
   });
 
 });
