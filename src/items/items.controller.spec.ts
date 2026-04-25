@@ -21,7 +21,8 @@ describe('ItemsService', () => {
   });
 
   test('encontrar todos', () => {
-    expect(service.findAll()).arrayOf(expect.any(String));
+    const caso1 = { id: 1, name: 'Item uno', description: 'Primer ejemplo de item' }M
+    expect(service.findAll()[0]).arrayContaining(caso1);
     //expect(service.findAll()).toHaveProperty('name');
     //expect(service.findAll()).toHaveProperty('description');    
   });
