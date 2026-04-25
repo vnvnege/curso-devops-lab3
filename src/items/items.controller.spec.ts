@@ -25,7 +25,17 @@ describe('ItemsService', () => {
   });
 
   test('encontrar uno', () => {
-    expect(service.findOne(1)).toHaveProperty('name', 'Item uno');      
+    expect(service.findOne(1)).toHaveProperty('name', 'Item uno');
+    expect(service.findOne(3)).toBe(`Item 3 not found`); 
+  });
+
+  test('agregar caso 3', () => {
+    expect(service.create('Item tres', 'Agregado por la prueba')).toHaveProperty('id', 3);      
+  });
+
+  test('borrar caso 3', () => {
+    expect(service.remove(3)).toBeNull();
+    expect(service.findOne(3)).toBe(`Item 3 not found`); 
   });
 
 });
