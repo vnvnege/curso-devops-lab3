@@ -24,12 +24,11 @@ describe('HealthController', () => {
   test('GET / No carga pagina', () => {    
     return request(app.getHttpServer())
       .get('/')
-      .expect(404)
-      .expect({status: 'ok'});
+      .expect(404);
   });
 });
 
-/*
+
 describe('HealthService', () => {
   let service: HealthService;
 
@@ -41,22 +40,7 @@ describe('HealthService', () => {
     service = module.get<HealthService>(HealthService);
   });
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
-  });
-
-  test('Deberia mostrar resultado', () => {
-    expect(service.operar('suma', 10, 50)).toBe(60);
-
-    let a = 10;
-    let b = 30;
-
-    expect(service.operar('suma', a, b)).not.toBe(41);
-
-    a = -100;
-    b = 10;
-
-    expect(service.operar('suma', a, b)).toBe(-90);
-  });
+  test('probando funcion getStatus', () => {
+    expect(service.getStatus()).toHaveProperty('status');
+  });  
 })
-  */
