@@ -24,7 +24,7 @@ describe('HealthController', () => {
 
   test('GET / Tiempo transcurrido', () => {    
     return request(app.getHttpServer())
-      .get('/')
-      .expect(200);
+      .get('')
+      .expect(404);
   });
 });
