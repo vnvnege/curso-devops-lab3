@@ -1,8 +1,8 @@
-//import { INestApplication } from '@nestjs/common';
+import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-//import request from 'supertest';
-//import { App } from 'supertest/types';
-//import { ItemsModule } from './items.module';
+import request from 'supertest';
+import { App } from 'supertest/types';
+import { ItemsModule } from './items.module';
 import { ItemsService } from './items.service';
 
 describe('ItemsService', () => {
@@ -44,3 +44,25 @@ describe('ItemsService', () => {
 
 });
 
+describe('ItemsController', () => {
+  let app: INestApplication<App>;
+
+  beforeEach(async () => {
+    const moduleFixture: TestingModule = await Test.createTestingModule({
+      imports: [ItemsModule],
+    }).compile();
+
+    app = moduleFixture.createNestApplication();
+    await app.init();
+  });
+
+  afterEach(async () => {
+    await app.close();
+  });
+
+  test('GET / No carga pagina', () => {    
+    return request(app.getHttpServer())
+      .get('/')
+      .expect(404);
+  });
+});
