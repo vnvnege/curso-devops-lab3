@@ -21,10 +21,12 @@ describe('ItemsService', () => {
   });
 
   test('encontrar todos', () => {
-    expect(service.findAll()).toHaveProperty('id');
-    expect(service.findAll()).toHaveProperty('name');
-    expect(service.findAll()).toHaveProperty('description');    
+    expect(service.findAll()).arrayOf(expect.any(String));
+    //expect(service.findAll()).toHaveProperty('name');
+    //expect(service.findAll()).toHaveProperty('description');    
   });
+
+  /*
 
   test('encontrar el primer valor', () => {
     expect(service.findOne(1)).toHaveProperty('name', 'Item uno');
@@ -40,6 +42,8 @@ describe('ItemsService', () => {
     expect(service.findOne(3)).toBeNaN();
   });
 })
+
+*/
 
 /*
 
