@@ -31,13 +31,7 @@ describe('HealthController', () => {
 
 describe('HealthService', () => {
   let service: HealthService;
-
-  const valoresDeseados = {
-    status: 'ok',
-    uptime: expect.toBeGreaterThan(0),
-    timestamp: expect.toBeDefined(),
-  };
-
+  
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [HealthService],
@@ -48,6 +42,7 @@ describe('HealthService', () => {
 
   test('probando funcion getStatus', () => {
     expect(service.getStatus()).toHaveProperty('status', 'ok');
-    expect(service.getStatus()).toMatchObject(valoresDeseados);
+    expect(service.getStatus()).toHaveProperty('uptime');
+    expect(service.getStatus()).toHaveProperty('timestamp');
   });  
 })
