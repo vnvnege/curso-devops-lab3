@@ -1,8 +1,8 @@
-import { INestApplication } from '@nestjs/common';
+//import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import request from 'supertest';
-import { App } from 'supertest/types';
-import { ItemsModule } from './items.module';
+//import request from 'supertest';
+//import { App } from 'supertest/types';
+//import { ItemsModule } from './items.module';
 import { ItemsService } from './items.service';
 
 describe('ItemsService', () => {
