@@ -35,11 +35,11 @@ describe('ItemsService', () => {
     expect(service.create('Item tres', 'Agregado por la prueba')).toHaveProperty('id', 3);      
   });
 
-  test('borrar caso 3', () => {
-    expect(service.remove(3)).toBeNull();
+  test('borrar caso 2', () => {
+    expect(service.remove(2)).toBeNull();
     expect(() =>
-      service.findOne(3))
-      .toThrow('Item 3 no encontrado',);
+      service.findOne(2))
+      .toThrow('Item 2 no encontrado',);
   });
 
 });
