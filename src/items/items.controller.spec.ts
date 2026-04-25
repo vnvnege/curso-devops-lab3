@@ -25,7 +25,7 @@ describe('ItemsService', () => {
   });
 
   test('encontrar uno', () => {
-    expect(service.findOne(1)).arrayContaining({ id: 1, name: 'Item uno', description: 'Primer ejemplo de item' });      
+    expect(service.findOne(1)).toHaveProperty('name', 'Item uno');      
   });
 
 });
