@@ -68,6 +68,7 @@ describe('ItemsController', () => {
       .get('')
       .expect(404);
   });
+
+  */
 });
 
-*/
