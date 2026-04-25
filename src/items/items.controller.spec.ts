@@ -21,8 +21,12 @@ describe('ItemsService', () => {
   });
 
   test('encontrar todos', () => {
-    expect(service.findAll()).toBeInstanceOf(Array);
-      
+    expect(service.findAll()).toBeInstanceOf(Array);      
+  });
+
+  test('encontrar uno', () => {
+    const caso1 = { id: 1, name: 'Item uno', description: 'Primer ejemplo de item' };
+    expect(service.findOne(1)).arrayContaining(caso1);      
   });
 
 });
