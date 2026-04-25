@@ -26,7 +26,7 @@ describe('ItemsService', () => {
 
   test('encontrar uno', () => {
     expect(service.findOne(1)).toHaveProperty('name', 'Item uno');
-    expect(service.findOne(3)).toBe(`Item 3 not found`); 
+    expect(service.findOne(3)).toBe(`Item 3 no encontrado`); 
   });
 
   test('agregar caso 3', () => {
