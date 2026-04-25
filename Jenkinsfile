@@ -45,7 +45,10 @@ pipeline {
                 stage("validacion de codigo"){
                     steps{
                         withSonarQubeEnv('sonarqube'){
-                            sh 'sonar-scanner'
+                            sh '''
+                                sonar-scanner   \
+                                -Dsonar.coverage.exclusions=**/*.spec.ts,**/*.test.ts
+                            '''
                         }
                     }
                 }
