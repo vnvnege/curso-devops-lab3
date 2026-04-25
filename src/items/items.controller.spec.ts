@@ -36,7 +36,7 @@ describe('ItemsService', () => {
   });
 
   test('borrar caso 2', () => {
-    expect(service.remove(2)).toBeNull();
+    expect(service.remove(2)).toBeUndefined();
     expect(() =>
       service.findOne(2))
       .toThrow('Item 2 no encontrado',);
